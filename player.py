@@ -1,5 +1,31 @@
 # Define the Player class.
 class Player():
+    """
+    This class represents a player. A player has a name and a current room.
+
+
+    Attributes:
+        name (str): The name of the player.
+        current_room (Room): The current room the player is in.
+
+
+    Methods:
+        __init__(self, name) : The constructor.
+        move(self, direction) : Move the player in a given direction.
+    Examples:
+
+
+    >>> player = Player("Alice")
+    >>> player.name
+    'Alice'
+    >>> player.current_room is None
+    True
+    >>> type(player.move)
+    <class 'function'>
+
+
+    """
+
 
     # Define the constructor.
     def __init__(self, name):
