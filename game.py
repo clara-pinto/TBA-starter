@@ -30,17 +30,25 @@ class Game:
         
         # Setup rooms
 
-        forest = Room("Forest", "une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
+        capitale = Room("Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.")
         self.rooms.append(forest)
-        tower = Room("Tower", "une immense tour en pierre qui s'élève au dessus des nuages.")
+        strahl = Room("Strahl", "une ville religieuse.")
         self.rooms.append(tower)
-        cave = Room("Cave", "une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
+        village = Room("Village de Heiter", "le village où habite Heiter, notre ami prêtre.")
         self.rooms.append(cave)
-        cottage = Room("Cottage", "un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
+        prairie = Room("Prairie", " une prarie.")
         self.rooms.append(cottage)
-        swamp = Room("Swamp", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
+        donjon = Room("Donjon", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
         self.rooms.append(swamp)
-        castle = Room("Castle", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
+        domaine = Room("Domaine de Graf Grenat", "une ville fortifiée dans les contrées du Nord, protégée par une barrière magique empechant les démons d'entrer dans la cité.\nCependant, bien que la ville reste prospère, ses environs sont une zone de guerre entre Aura et ses démons et les humains.")
+        self.rooms.append(castle)
+        plateau = Room("Village isolée du Plateau du Nord", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
+        self.rooms.append(castle)
+        ausserst = Room("Ausserst", "la cité magique du Nord, siège de l'Association Magique Continentale.\nC'est aussi une ville réputée pour ses académies et infrastructures dédiées aux mages.")
+        self.rooms.append(castle)
+        royaume = Room("Royaume du Nord", "le Royaume du Nord, où se trouvent quelques villages isolées, de grandes forêts enneigées.\nPrenez garde ! Les routes sont dangereuses et infestées de montres.")
+        self.rooms.append(castle)
+        aureole = Room("Auréole", "Auréole, le royaume où reposerait les âmes des défunts.")
         self.rooms.append(castle)
 
         # Create exits for rooms
