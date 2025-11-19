@@ -54,8 +54,28 @@ class Actions:
             return False
 
         # Get the direction from the list of words.
-        direction = list_of_words[1]
+        direction_map = {
+            "N": "N", "NORD": "N",
+            "E": "E", "EST": "E",
+            "S": "S", "SUD": "S",
+            "O": "O", "OUEST": "O",
+            "U": "U", "UP": "U", "HAUT": "U",
+            "D": "D", "DOWN": "D", "BAS": "D"
+        }
+
+        input_dir = list_of_words[1].upper()
+
         # Move the player in the direction specified by the parameter.
+        if input_dir not in direction_map:
+            print("Cette direction n'est pas valide.")
+            return False
+        
+        direction = direction_map[input_dir]
+
+        if direction not in game.player.current_room.exits:
+            print("Vous ne pouvez pas aller dans cette direction.")
+            return False
+        
         player.move(direction)
         return True
 
@@ -136,8 +156,4 @@ class Actions:
         for command in game.commands.values():
             print("\t- " + str(command))
         print()
-        return True
-    
-    def directions(game, list_of_words, number_of_parameters):
-       
         return True
