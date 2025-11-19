@@ -27,7 +27,9 @@ class Game:
         self.commands["quit"] = quit
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
         self.commands["go"] = go
-        
+        directions = Command("directions", " : afficher les directions possibles depuis la pièce actuelle", Actions.directions, 0)
+        self.commands["directions"] = directions
+
         # Setup rooms
 
         capitale = Room("Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.")

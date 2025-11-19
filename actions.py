@@ -137,3 +137,7 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+    
+    def directions(game, list_of_words, number_of_parameters):
+       
+        return True
