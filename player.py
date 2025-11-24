@@ -32,7 +32,7 @@ class Player():
         self.name = name
         self.current_room = None
         self.history = []
-   
+    
     # Define the move method.
     def move(self, direction):
         # Get the next room from the exits dictionary of the current room.
