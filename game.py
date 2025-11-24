@@ -29,6 +29,8 @@ class Game:
         self.commands["go"] = go
         history = Command("history", " : accéder à l'historique des lieux", Actions.history, 0)
         self.commands["history"] = history
+        back = Command("back", " : revenir en arrière", Actions.back, 0)
+        self.commands["back"] = back
         
         self.directions = []
         for i in self.rooms:
