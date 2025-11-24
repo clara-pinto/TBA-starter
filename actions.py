@@ -77,6 +77,7 @@ class Actions:
             return False
         
         player.move(direction)
+        player.get_history()
         return True
 
     def quit(game, list_of_words, number_of_parameters):
@@ -156,4 +157,29 @@ class Actions:
         for command in game.commands.values():
             print("\t- " + str(command))
         print()
+        return True
+
+    def history(game, list_of_words, number_of_parameters):
+        """
+        Affiche l'historique des lieux visités par le joueur.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True si la commande a été exécutée avec succès, False sinon.
+        """
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if game.player is None:
+            print("Aucun joueur n'est défini.")
+            return False
+
+        game.player.get_history()
         return True
