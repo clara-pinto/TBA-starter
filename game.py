@@ -27,6 +27,8 @@ class Game:
         self.commands["quit"] = quit
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
         self.commands["go"] = go
+        history = Command("history", " : accéder à l'historique des lieux", Actions.history, 0)
+        self.commands["history"] = history
         
         self.directions = []
         for i in self.rooms:
@@ -37,25 +39,25 @@ class Game:
 
         # Setup rooms
 
-        capitale = Room("Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.")
+        capitale = Room("la Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.")
         self.rooms.append(capitale)
         strahl = Room("Strahl", "une ville religieuse.")
         self.rooms.append(strahl)
-        village = Room("Village de Heiter", "le village où habite Heiter, notre ami prêtre.")
+        village = Room("le village de Heiter", "le village où habite Heiter, notre ami prêtre.")
         self.rooms.append(village)
-        prairie = Room("Prairie", " une prairie.")
+        prairie = Room("la prairie", "grande étendue de fleurs.")
         self.rooms.append(prairie)
-        donjon = Room("Donjon", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
+        donjon = Room("un donjon", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
         self.rooms.append(donjon)
-        domaine = Room("Domaine de Graf Grenat", "une ville fortifiée dans les contrées du Nord, protégée par une barrière magique empechant les démons d'entrer dans la cité.\nCependant, bien que la ville reste prospère, ses environs sont une zone de guerre entre Aura et ses démons et les humains.")
+        domaine = Room("le domaine de Graf Grenat", "une ville fortifiée dans les contrées du Nord, protégée par une barrière magique empechant les démons d'entrer dans la cité.\nCependant, bien que la ville reste prospère, ses environs sont une zone de guerre entre Aura et ses démons et les humains.")
         self.rooms.append(domaine)
-        plateau = Room("Village isolée du Plateau du Nord", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
+        plateau = Room("un des villages isolés du Plateau du Nord", "plaines isolées où se trouvent des villages et de grandes forêts enneigées.")
         self.rooms.append(plateau)
         ausserst = Room("Ausserst", "la cité magique du Nord, siège de l'Association Magique Continentale.\nC'est aussi une ville réputée pour ses académies et infrastructures dédiées aux mages.")
         self.rooms.append(ausserst)
-        royaume = Room("Royaume du Nord", "le Royaume du Nord, où se trouvent quelques villages isolées, de grandes forêts enneigées.\nPrenez garde ! Les routes sont dangereuses et infestées de montres.")
+        royaume = Room("le Royaume du Nord", "Prenez garde ! Les routes sont dangereuses et infestées de montres.")
         self.rooms.append(royaume)
-        aureole = Room("Auréole", "Auréole, le royaume où reposerait les âmes des défunts.")
+        aureole = Room("Auréole", "le royaume où reposerait les âmes des défunts.")
         self.rooms.append(aureole)
 
         # Create exits for rooms
@@ -101,6 +103,7 @@ class Game:
         else:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
+        
 
     # Print the welcome message
     def print_welcome(self):
