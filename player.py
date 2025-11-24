@@ -51,6 +51,9 @@ class Player():
         return True
 
     def get_history(self):
+        if len(self.history) == 0:
+            print("Vous n'avez visité aucun lieu.\n")
+            return
         print("Vous avez déjà visité les lieux suivants :\n")
         for elt in self.history:
             print("\t-",elt.name,"\n")
