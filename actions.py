@@ -212,3 +212,63 @@ class Actions:
         print(player.current_room.get_long_description())
         game.player.get_history()
         return True
+
+    def look(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if game.player is None:
+            print("Aucun item est défini.")
+            return False
+
+        game.player.current_room.get_inventory()
+        return True
+
+    def take(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if game.player is None:
+            print("Aucun item n'est défini.")
+            return False
+
+        item_name = list_of_words[1].lower()
+        objet = game.player.current_room.inventory.pop(item_name) 
+        game.player.inventory[item_name] = objet
+        return True
+
+    def drop(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if game.player is None:
+            print("Aucun item n'est défini.")
+            return False
+
+        item_name = list_of_words[1].lower()
+        objet = game.player.inventory.pop(item_name)  
+        game.player.current_room.inventory[item_name] = objet
+        return True
+
+    def check(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if game.player is None:
+            print("Aucun item n'est défini.")
+            return False
+
+        game.player.get_inventory()
+        return True

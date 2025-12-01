@@ -32,6 +32,7 @@ class Player():
         self.name = name
         self.current_room = None
         self.history = []
+        self.inventory = {}
     
     # Define the move method.
     def move(self, direction):
@@ -57,3 +58,11 @@ class Player():
         print("Vous avez déjà visité les lieux suivants :\n")
         for elt in self.history:
             print("\t-",elt.name,"\n")
+
+    def get_inventory(self):
+        if len(self.inventory) == 0:
+            print("Votre inventaire est vide.\n")
+            return
+        print("Vous disposez des items suivants :\n")
+        for item in self.inventory.values():
+            print(f"\t- {item.name} : {item.description} ({item.weight} kg)\n")

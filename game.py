@@ -32,6 +32,15 @@ class Game:
         self.commands["history"] = history
         back = Command("back", " : revenir en arrière", Actions.back, 0)
         self.commands["back"] = back
+        look = Command("look", " : afficher la liste des items présents dans le lieu actuel", Actions.look, 0)
+        self.commands["look"] = look
+        take = Command("take", " : prendre les items dans le lieu actuel", Actions.take, 1)
+        self.commands["take"] = take
+        drop = Command("drop", " : remettre un item dans le lieu visité", Actions.drop, 1)
+        self.commands["drop"] = drop
+        check = Command("check", " : vérifier l'inventaire", Actions.check, 0)
+        self.commands["check"] = check
+        
         
         self.directions = []
         for i in self.rooms:
@@ -76,13 +85,35 @@ class Game:
         royaume.exits = {"N" : aureole, "E" : None, "S" : ausserst, "O" : None, "U" : None, "D" : None}
         aureole.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
 
+        # Setup items
+        capitale.inventory = {
+            "sceptre": Item("sceptre", "bâton magique personnel.", "2")
+        }
+        village.inventory = {
+            "grimoire": Item("grimoire de Flamme", "livre de sorts transmis par Flamme, notre mentor.", "1.5")
+        }
+        strahl.inventory = {
+            "monument": Item("monument de la déesse", "statuette de la déesse en pierre, considéré comme un artéfact religieux .", "10")
+        }
+        domaine.inventory = {
+            "reliques": Item("reliques impériales", "armes anciennes conservés par l'Empire.", "15"),
+            "barriere": Item("barrière magique de Graf Grenat", "artéfact immatériel, barrière érigée par Flamme pour protéger la ville contre les démons.", "0")
+        }
+        plateau.inventory = {
+            "artefacts": Item("artéfacts liés à Auréole", "objets mystiques censés guider vers Aureole (pierres, talismans).", "2")
+        }
+        ausserst.inventory = {
+            "medaillon": Item("médaillon de l'Examen des Mages", "petit médaillon en métal, remis aux candidats pour prouver leur réussite à l'examen de mage de première classe.", "0.2")
+        }
+        royaume.inventory = {
+            "statue": Item("Statues en Or", "habitants transformés en or par magie.", "247")
+        }
+
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = capitale
 
-        # Setup items
-        sword = Item("sword","une épée au fil tranchant comme un rasoir", 2)
 
     # Play the game
     def play(self):
