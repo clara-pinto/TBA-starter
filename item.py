@@ -1,3 +1,6 @@
+
+DEBUG = True
+
 # Define the Item class.
 class Item():
     # Define the constructor.

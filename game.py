@@ -7,6 +7,9 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from character import Character
+from item import DEBUG
+
 
 class Game:
 
@@ -32,7 +35,7 @@ class Game:
         self.commands["history"] = history
         back = Command("back", " : revenir en arrière", Actions.back, 0)
         self.commands["back"] = back
-        look = Command("look", " : afficher la liste des items présents dans le lieu actuel", Actions.look, 0)
+        look = Command("look", " : afficher la liste des items et des personnages présents dans le lieu actuel", Actions.look, 0)
         self.commands["look"] = look
         take = Command("take", " : prendre les items dans le lieu actuel", Actions.take, 1)
         self.commands["take"] = take
@@ -40,6 +43,8 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " : vérifier l'inventaire", Actions.check, 0)
         self.commands["check"] = check
+        talk = Command("talk", " <someone> : intéragir avec les personnages non joueurs", Actions.talk, 1)
+        self.commands["talk"] = talk
         
         
         self.directions = []
@@ -108,6 +113,22 @@ class Game:
         royaume.inventory = {
             "statue": Item("Statues en Or", "habitants transformés en or par magie.", "247")
         }
+
+        # Setup characters
+        village.characters = {
+            "fern": Character("Fern", "orpheline recuillie par le prêtre Heiter, talentueuse magicienne.", village, ["Si je ne m'occupe pas de tout, rien avance..."]),
+            "heiter": Character("Heiter", "Prêtre du groupe originel, jovial mais alcoolique.", village, ["La vie est courte... alors profitons-en, même un verre à la main."])
+        }
+        prairie.characters = {
+            "stark": Character("Stark", "jeune guerrier élevé par Eisen, un ancien compagnon.", prairie, ["Je ne suis pas aussi fort que vous le pensez... mais je ferai de mon mieux pour vous protéger."]),
+            "eisen": Character("Eisen", "guerrier nain du groupe originel.", prairie, ["La force n'est rien sans le courage de l'utiliser pour les autres."])
+        }
+        aureole.characters = {
+            "himmel": Character("Himmel", "le héros humain qui a vaincu le Roi Démon, avec nous.", aureole, ["Ce qui compte, ce n'est pas la durée... mais les souvenirs qu'on a créés ensemble."])
+        }   
+        strahl.characters = {
+            "flamme": Character("Flamme", "grande magicienne qui nous a sauvé par le passé et qui nous a enseigné la magie.", strahl, ["La magie n'est pas qu'un pouvoir... c'est une trace de ce que nous sommes."])
+        }             
 
         # Setup player and starting room
 

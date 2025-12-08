@@ -39,6 +39,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
+        self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -63,9 +64,19 @@ class Room:
         return f"\nVous êtes dans {self.name} : {self.description}\n\n{self.get_exit_string()}\n"
     
     def get_inventory(self):
-        if len(self.inventory) == 0:
+        if len(self.inventory) == 0 and len(self.characters) == 0:
             print("Il n'y a rien ici.\n")
             return
-        print("La pièce contient :\n")
+        print("On voit :\n")
         for item in self.inventory.values():
             print(f"\t- {item.name} : {item.description} ({item.weight} kg)\n")
+        for character in self.characters.values():
+            print(f"\t- {character.name} : {character.description}\n")
+
+    def move():
+        l = [1,2]
+        if random.choice(l) == 1:
+            adj = list(self.exits.values())
+            self.character.current_room = random.choice(adj)
+            return true
+        return false

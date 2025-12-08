@@ -1,3 +1,5 @@
+from item import DEBUG
+
 # Description: The actions module.
 
 # The actions module contains the functions that are called when a command is executed.
@@ -63,6 +65,9 @@ class Actions:
             "D": "D", "DOWN": "D", "BAS": "D"
         }
 
+        if DEBUG:
+            print(f"DEBUG: directions = {game.directions} depuis {game.player.current_room.name}")
+
         input_dir = list_of_words[1].upper()
 
         # Move the player in the direction specified by the parameter.
@@ -112,6 +117,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
         
+        if DEBUG:
+            print(f"DEBUG: Quitting the game.")
+
         # Set the finished attribute of the game object to True.
         player = game.player
         msg = f"\nMerci {player.name} d'avoir joué. Au revoir.\n"
@@ -152,6 +160,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
         
+        if DEBUG:
+            print(f"DEBUG: Printing the list of available commands.")
+
         # Print the list of available commands.
         print("\nVoici les commandes disponibles:")
         for command in game.commands.values():
@@ -176,6 +187,9 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
             return False
+
+        if DEBUG:
+            print(f"DEBUG: Affichage de l'historique des lieux visités par le joueur.")
 
         if game.player is None:
             print("Aucun joueur n'est défini.")
@@ -202,6 +216,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
+        if DEBUG:
+            print(f"DEBUG: Revenir à la pièce précédente.")
+
         player = game.player
         if not player.history:
             print("Vous n'avez pas d'historique de pièces à revenir.")
@@ -220,6 +237,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
+        if DEBUG:
+            print(f"DEBUG: Affichage de l'inventaire de la pièce actuelle.")
+
         if game.player is None:
             print("Aucun item est défini.")
             return False
@@ -233,6 +253,9 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
             return False
+
+        if DEBUG:
+            print(f"DEBUG: Prendre un item de la pièce actuelle.")
 
         if game.player is None:
             print("Aucun item n'est défini.")
@@ -250,6 +273,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
+        if DEBUG:
+            print(f"DEBUG: Remettre un item dans la pièce actuelle.")
+
         if game.player is None:
             print("Aucun item n'est défini.")
             return False
@@ -266,9 +292,42 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
+        if DEBUG:
+            print(f"DEBUG: Affichage de l'inventaire du joueur.")
+
         if game.player is None:
             print("Aucun item n'est défini.")
             return False
 
         game.player.get_inventory()
+        return True
+
+    def talk(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if DEBUG:
+            print(f"DEBUG: Parler à un personnage non joueur.")
+            
+        if game.player is None:
+            print("Aucun personnage n'est défini.")
+            return False
+
+        character_name = list_of_words[1].lower()
+        character = game.player.current_room.characters.get(character_name)
+        if character is None:
+            print(f"Il n'y a pas de personnage nommé '{character_name}' ici.")
+            return False
+
+        msgs = character.get_msgs()
+        if not msgs:
+            print(f"{character.name} n'a rien à dire.")
+            return True
+
+        import random
+        message = random.choice(msgs)
+        print(f"{character.name} dit : '{message}'")
         return True
