@@ -117,17 +117,17 @@ class Game:
         # Setup characters
         village.characters = {
             "fern": Character("Fern", "orpheline recuillie par le prêtre Heiter, talentueuse magicienne.", village, ["Si je ne m'occupe pas de tout, rien avance..."]),
-            "heiter": Character("Heiter", "Prêtre du groupe originel, jovial mais alcoolique.", village, ["La vie est courte... alors profitons-en, même un verre à la main."])
+            "heiter": Character("Heiter", "Prêtre du groupe originel, jovial mais alcoolique.", village, ["La vie est courte... alors profitons-en, même un verre à la main.", "Un verre de vin, et la vie devient plus douce."])
         }
         prairie.characters = {
-            "stark": Character("Stark", "jeune guerrier élevé par Eisen, un ancien compagnon.", prairie, ["Je ne suis pas aussi fort que vous le pensez... mais je ferai de mon mieux pour vous protéger."]),
-            "eisen": Character("Eisen", "guerrier nain du groupe originel.", prairie, ["La force n'est rien sans le courage de l'utiliser pour les autres."])
+            "stark": Character("Stark", "jeune guerrier élevé par Eisen, un ancien compagnon.", prairie, ["Je ne suis pas aussi fort que vous le pensez... mais je ferai de mon mieux pour vous protéger.","Je ne suis pas un héros, juste quelqu'un qui veut protéger ses amis."]),
+            "eisen": Character("Eisen", "guerrier nain du groupe originel.", prairie, ["La force n'est rien sans le courage de l'utiliser pour les autres.","Un guerrier ne vit pas pour lui-même, mais pour ceux qu'il protège."])
         }
         aureole.characters = {
-            "himmel": Character("Himmel", "le héros humain qui a vaincu le Roi Démon, avec nous.", aureole, ["Ce qui compte, ce n'est pas la durée... mais les souvenirs qu'on a créés ensemble."])
+            "himmel": Character("Himmel", "le héros humain qui a vaincu le Roi Démon, avec nous.", aureole, ["Ce qui compte, ce n'est pas la durée... mais les souvenirs qu'on a créés ensemble.","Même si le monde est cruel, il y a toujours de la beauté à trouver."])
         }   
         strahl.characters = {
-            "flamme": Character("Flamme", "grande magicienne qui nous a sauvé par le passé et qui nous a enseigné la magie.", strahl, ["La magie n'est pas qu'un pouvoir... c'est une trace de ce que nous sommes."])
+            "flamme": Character("Flamme", "grande magicienne qui nous a sauvé par le passé et qui nous a enseigné la magie.", strahl, ["La magie est une trace de notre passage dans le monde.","Chaque sort raconte une histoire."])
         }             
 
         # Setup player and starting room
