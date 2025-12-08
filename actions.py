@@ -66,7 +66,7 @@ class Actions:
         }
 
         if DEBUG:
-            print(f"DEBUG: directions = {game.directions} depuis {game.player.current_room.name}")
+            print(f"DEBUG: directions = {list_of_words} depuis {game.player.current_room.name}")
 
         input_dir = list_of_words[1].upper()
 
