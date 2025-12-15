@@ -144,6 +144,8 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
+            for character in self.player.current_room.characters.values():
+                character.move()
         return None
 
     # Process the command entered by the player

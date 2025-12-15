@@ -72,11 +72,3 @@ class Room:
             print(f"\t- {item.name} : {item.description} ({item.weight} kg)\n")
         for character in self.characters.values():
             print(f"\t- {character.name} : {character.description}\n")
-
-    def move():
-        l = [1,2]
-        if random.choice(l) == 1:
-            adj = list(self.exits.values())
-            self.character.current_room = random.choice(adj)
-            return true
-        return false

@@ -35,3 +35,14 @@ class Character:
     
     def get_msgs(self):
         return self.msgs
+    
+    def move(self):
+        import random
+        exits = list(self.current_room.exits.values())
+        if exits:
+            new_room = random.choice(exits)
+            if new_room is not None:
+                self.current_room = new_room
+                print(f"{self.name} se déplace vers {self.current_room.name}.\n")
+                return True
+        return False
