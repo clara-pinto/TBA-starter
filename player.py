@@ -33,6 +33,9 @@ class Player():
         self.current_room = None
         self.history = []
         self.inventory = {}
+        self.move_count = 0
+        self.quest_manager = QuestManager(self)
+        self.rewards = []   # List to store earned rewards
     
     # Define the move method.
     def move(self, direction):
@@ -49,6 +52,14 @@ class Player():
         # Set the current room to the next room.
         self.current_room = next_room
         print(self.current_room.get_long_description())
+
+        # Check room visit objectives
+        self.quest_manager.check_room_objectives(self.current_room.name)
+
+        # Increment move counter and check movement objectives
+        self.move_count += 1
+        self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+
         return True
 
     def get_history(self):
@@ -66,3 +77,20 @@ class Player():
         print("Vous disposez des items suivants :\n")
         for item in self.inventory.values():
             print(f"\t- {item.name} : {item.description} ({item.weight} kg)\n")
+
+    def add_reward(self, reward):
+        if reward and reward not in self.rewards:
+            self.rewards.append(reward)
+            print( 🎁 f"\n Vous avez obtenu: {reward}\n")
+
+    def show_rewards(self):
+        if not self.rewards:
+            print( 🎁 "\n Aucune récompense obtenue pour le moment.\n")
+        else:
+            print("\n🎁 Vos récompenses:")
+            for reward in self.rewards:
+                print(f"  • {reward}")
+            print()
+
+
+

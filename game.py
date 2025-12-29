@@ -8,6 +8,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
+from quest import Quest
 from item import DEBUG
 
 
@@ -21,30 +22,29 @@ class Game:
         self.player = None
     
     # Setup the game
-    def setup(self):
+    def setup(self, player_name=None):
+        """Initialize the game with rooms, commands, and quests."""
+        self._setup_commands()
+        self._setup_rooms()
+        self._setup_player(player_name)
+        self._setup_quests()
 
         # Setup commands
-
-        help = Command("help", " : afficher cette aide", Actions.help, 0)
-        self.commands["help"] = help
-        quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
-        self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
-        self.commands["go"] = go
-        history = Command("history", " : accéder à l'historique des lieux", Actions.history, 0)
-        self.commands["history"] = history
-        back = Command("back", " : revenir en arrière", Actions.back, 0)
-        self.commands["back"] = back
-        look = Command("look", " : afficher la liste des items et des personnages présents dans le lieu actuel", Actions.look, 0)
-        self.commands["look"] = look
-        take = Command("take", " : prendre les items dans le lieu actuel", Actions.take, 1)
-        self.commands["take"] = take
-        drop = Command("drop", " : remettre un item dans le lieu visité", Actions.drop, 1)
-        self.commands["drop"] = drop
-        check = Command("check", " : vérifier l'inventaire", Actions.check, 0)
-        self.commands["check"] = check
-        talk = Command("talk", " <someone> : intéragir avec les personnages non joueurs", Actions.talk, 1)
-        self.commands["talk"] = talk
+    def _setup_commands(self):
+        """Initialize all game"""
+        self.commands["help"] = Command("help", " : afficher cette aide", Actions.help, 0)
+        self.commands["quit"] = Command("quit", " : quitter le jeu", Actions.quit, 0)
+        self.commands["go"] = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
+        self.commands["history"] = Command("history", " : accéder à l'historique des lieux", Actions.history, 0)
+        self.commands["back"] = Command("back", " : revenir en arrière", Actions.back, 0)
+        self.commands["look"] = Command("look", " : afficher la liste des items et des personnages présents dans le lieu actuel", Actions.look, 0)
+        self.commands["take"] = Command("take", " : prendre les items dans le lieu actuel", Actions.take, 1)
+        self.commands["check"] = Command("check", " : vérifier l'inventaire", Actions.check, 0)
+        self.commands["talk"] = Command("talk", " <someone> : intéragir avec les personnages non joueurs", Actions.talk, 1)
+        self.commands["quests"] = Command("quests", " : afficher la liste des quêtes", Actions.quests, 0)
+        self.commands["quest"] = Command("quest", " <titre> : afficher les détails d'une quête", Actions.quest, 1)
+        self.commands["activate"] = Command("activate", " <titre> : activer une quête", Actions.activate, 1)
+        self.commands["rewards"] = Command("rewards", " : afficher vos récompenses", Actions.rewards, 0)
         
         
         self.directions = []
@@ -55,7 +55,9 @@ class Game:
     
 
         # Setup rooms
-
+    def _setup_rooms(self):
+        """Initialize all rooms and their exits."""
+        #Create rooms
         capitale = Room("la Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.")
         self.rooms.append(capitale)
         strahl = Room("Strahl", "une ville religieuse.")
@@ -77,8 +79,11 @@ class Game:
         aureole = Room("Auréole", "le royaume où reposerait les âmes des défunts.")
         self.rooms.append(aureole)
 
-        # Create exits for rooms
+        # Add rooms to game
+        for room in [capitale, strahl, village, prairie, donjon, domaine, plateau, ausserst, royaume,aureole]:
+            self.rooms.append(room)
 
+        # Create exits for rooms
         capitale.exits = {"N" : strahl, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
         strahl.exits = {"N" : prairie, "E" : None, "S" : capitale, "O" : village, "U" : None, "D" : None}
         village.exits = {"N" : None, "E" : strahl, "S" : None, "O" : None, "U" : None, "D" : None}
@@ -131,9 +136,47 @@ class Game:
         }             
 
         # Setup player and starting room
+    def _setup_player(self, player_name=None):
+        """Initialize the player."""
+        if player_name is None:
+            player_name = input("\nEntrez votre nom: ")
 
-        self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = capitale
+        self.player = Player(player_name)
+        self.player.current_room = self.rooms[0] #capitale
+
+    def _setup_quests(self):
+        """Initialize all quests."""
+        exploration_quest = Quest(
+            title="Grand Explorateur",
+            description="Explorez tous les lieux de ce monde mystérieux.",
+            objectives=["Visiter Forest"
+                        , "Visiter Tower"
+                        , "Visiter Cave"
+                        , "Visiter Cottage"
+                        , "Visiter Castle"],
+            reward="Titre de Grand Explorateur"
+        )
+
+        travel_quest = Quest(
+            title="Grand Voyageur",
+            description="Déplacez-vous 10 fois entre les lieux.",
+            objectives=["Se déplacer 10 fois"],
+            reward="Bottes de voyageur"
+        )
+
+        discovery_quest = Quest(
+            title="Découvreur de Secrets",
+            description="Découvrez les trois lieux les plus mystérieux.",
+            objectives=["Visiter Cave"
+                        , "Visiter Tower"
+                        , "Visiter Castle"],
+            reward="Clé dorée"
+        )
+
+        # Add quests to player's quest manager
+        self.player.quest_manager.add_quest(exploration_quest)
+        self.player.quest_manager.add_quest(travel_quest)
+        self.player.quest_manager.add_quest(discovery_quest)
 
 
     # Play the game
