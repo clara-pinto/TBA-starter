@@ -1,49 +1,32 @@
 # Define the Room class.
 
 class Room:
-    """
-    This class represents a room. A room has a name, a description and exits.
-
-    Attributes:
-        name (str): The name of the room.
-        description (str): The description of the room.
-        exits (dict): The different exits you can access from the current room.
-
-    Methods:
-        __init__(self, name, description) : The constructor.
-        get_exit(self, direction) : Return the room in the given direction if it exists.
-        get_exit_string(self) : Return a string describing the room's exits.
-        get_long_description(self) : Return a long description of this room including exits.
-
-    Examples:
-
-    >>> room = Room("cuisine", "La où on mange", {Salon})
-    >>> room.name
-    'cuisine'
-    >>> room.description
-    'La où on mange'
-    >>> room.exits
-    Salon
-    >>> type(room.get_exit)
-    <class 'function'>
-    >>> type(room.get_exit_string)
-    <class 'function'>
-    >>> type(room.get_long_description)
-    <class 'function'>
-
-    """
+   """The Room class represents a room in the game."""
 
     # Define the constructor. 
-    def __init__(self, name, description):
+    def __init__(self, name, description, image=None):
+        """
+        Initialize a Room with a name and description.
+        
+        >>> room = Room("Hall", "dans un grand hall")
+        >>> room.name
+        'Hall'
+        >>> room.description
+        'dans un grand hall'
+        >>> room.exits
+        {}
+        >>> room.image is None
+        True
+        """
         self.name = name
         self.description = description
+        self.image = image # Path to image file (PNG/JPG) for this room
         self.exits = {}
         self.inventory = {}
         self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
-
         # Return the room in the given direction if it exists.
         if direction in self.exits.keys():
             return self.exits[direction]
