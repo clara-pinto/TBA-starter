@@ -178,6 +178,24 @@ class Game:
         self.player.quest_manager.add_quest(interaction_quest)
         self.player.quest_manager.add_quest(item_quest)
 
+    def win(self):
+        """Check if all quests are completed to finish the game."""
+        for elt in self.player.quests.values():
+            if elt.is_completed():
+                self.player.add_reward(elt.reward)
+                print(f"\nFélicitations ! Vous avez complété la quête : {elt.title}\n")
+            else:
+                return False
+        print("\nVous avez terminé toutes les quêtes du jeu ! Merci d'avoir joué.\n")
+        return True
+    
+    def loose(self):
+        """Check if the player has lost the game."""
+        # when you enter in donjon with no the sceptre
+        if sceptre not in self.player.inventory and self.player.current_room == donjon:
+            print("\nVous avez perdu le jeu ! Il n'y a plus rien à faire ici.\n")
+            return True
+        return False
 
     # Play the game
     def play(self):
@@ -206,7 +224,7 @@ class Game:
         else:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
-        
+    
 
     # Print the welcome message
     def print_welcome(self):
