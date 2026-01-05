@@ -1,3 +1,4 @@
+from quest import QuestManager
 # Define the Player class.
 class Player():
     """
@@ -81,11 +82,11 @@ class Player():
     def add_reward(self, reward):
         if reward and reward not in self.rewards:
             self.rewards.append(reward)
-            print( 🎁 f"\n Vous avez obtenu: {reward}\n")
+            print(f"\n🎁 Vous avez obtenu: {reward}\n")
 
     def show_rewards(self):
         if not self.rewards:
-            print( 🎁 "\n Aucune récompense obtenue pour le moment.\n")
+            print("\n🎁 Aucune récompense obtenue pour le moment.\n")
         else:
             print("\n🎁 Vos récompenses:")
             for reward in self.rewards:
