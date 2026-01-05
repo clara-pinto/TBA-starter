@@ -1,4 +1,7 @@
 # Define the Player class.
+
+from quest import QuestManager
+
 class Player():
     """
     This class represents a player. A player has a name and a current room.
@@ -81,13 +84,13 @@ class Player():
     def add_reward(self, reward):
         if reward and reward not in self.rewards:
             self.rewards.append(reward)
-            print( 🎁 f"\n Vous avez obtenu: {reward}\n")
+            print( f"\n Vous avez obtenu: {reward}\n")
 
     def show_rewards(self):
         if not self.rewards:
-            print( 🎁 "\n Aucune récompense obtenue pour le moment.\n")
+            print( "\n Aucune récompense obtenue pour le moment.\n")
         else:
-            print("\n🎁 Vos récompenses:")
+            print("\nVos récompenses:")
             for reward in self.rewards:
                 print(f"  • {reward}")
             print()
