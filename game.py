@@ -192,36 +192,36 @@ class Game:
     def _setup_quests(self):
         """Initialize all quests."""
         exploration_quest = Quest(
-            title="Grand Explorateur",
-            description="Explorez tous les lieux de ce monde mystérieux.",
-            objectives=["Visiter Forest"
-                        , "Visiter Tower"
-                        , "Visiter Cave"
-                        , "Visiter Cottage"
-                        , "Visiter Castle"],
-            reward="Titre de Grand Explorateur"
+            title="Vers Auréole",
+            description="Franchissez les étapes nécessaires pour atteindre ce lieu légendaire.",
+            objectives=["Visiter le village de Heiter"
+                        , "talk avec Fern"
+                        , "talk à Heiter"
+                        , "Visiter Ausserst"
+                        , "take le médaillon de l'Examen des Mages"
+                        , "Aller à Auréole"],
+            reward="Bénédiction d'Auréole"
         )
 
-        travel_quest = Quest(
-            title="Grand Voyageur",
-            description="Déplacez-vous 10 fois entre les lieux.",
-            objectives=["Se déplacer 10 fois"],
-            reward="Bottes de voyageur"
+        interaction_quest = Quest(
+            title="Retrouver Himmel",
+            description="Retrouvez votre ancien compagnon Himmel à Auréole.",
+            objectives=["Aller à Auréole"],
+            reward="Souvenirs d'aventures récupérés"
         )
 
-        discovery_quest = Quest(
-            title="Découvreur de Secrets",
-            description="Découvrez les trois lieux les plus mystérieux.",
-            objectives=["Visiter Cave"
-                        , "Visiter Tower"
-                        , "Visiter Castle"],
-            reward="Clé dorée"
+        item_quest = Quest(
+            title="Récupérer le Sceptre",
+            description="Récupérer le sceptre.",
+            objectives=["Aller à la Capitale du Royaume Central"
+                        , "prendre le sceptre"],
+            reward="Aucune récompense"
         )
 
         # Add quests to player's quest manager
         self.player.quest_manager.add_quest(exploration_quest)
-        self.player.quest_manager.add_quest(travel_quest)
-        self.player.quest_manager.add_quest(discovery_quest)
+        self.player.quest_manager.add_quest(interaction_quest)
+        self.player.quest_manager.add_quest(item_quest)
 
     def win(self):
         """Check if all quests are completed to finish the game."""
