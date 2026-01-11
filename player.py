@@ -85,19 +85,19 @@ class Player():
     def add_reward(self, reward):
         if reward and reward not in self.rewards:
             self.rewards.append(reward)
-<<<<<<< HEAD
+
             print(f"\n🎁 Vous avez obtenu: {reward}\n")
 
     def show_rewards(self):
         if not self.rewards:
             print("\n🎁 Aucune récompense obtenue pour le moment.\n")
-=======
-            print( f"\n Vous avez obtenu: {reward}\n")
+
+            print( f"\n Vous avez obtenu: {self.reward}\n")
 
     def show_rewards(self):
         if not self.rewards:
             print( "\n Aucune récompense obtenue pour le moment.\n")
->>>>>>> 50e072c8961ed19b64d566920d3c1ffe5d5e43bc
+
         else:
             print("\nVos récompenses:")
             for reward in self.rewards:

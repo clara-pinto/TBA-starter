@@ -264,6 +264,7 @@ class Actions:
         item_name = list_of_words[1].lower()
         objet = game.player.current_room.inventory.pop(item_name) 
         game.player.inventory[item_name] = objet
+        game.player.quest_manager.check_action_objectives("prendre", item_name)
         return True
 
     def drop(game, list_of_words, number_of_parameters):
@@ -330,6 +331,7 @@ class Actions:
         import random
         message = random.choice(msgs)
         print(f"{character.name} dit : '{message}'")
+        game.player.quest_manager.check_action_objectives("parler",character_name)
         return True
 
     def quests(game, list_of_words, number_of_parameters):

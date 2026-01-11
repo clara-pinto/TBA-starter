@@ -120,7 +120,7 @@ class Game:
             "artefacts": Item("artéfacts liés à Auréole", "objets mystiques censés guider vers Aureole (pierres, talismans).", "2")
         }
         ausserst.inventory = {
-            "medaillon": Item("médaillon de l'Examen des Mages", "petit médaillon en métal, remis aux candidats pour prouver leur réussite à l'examen de mage de première classe.", "0.2")
+            "médaillon": Item("médaillon de l'Examen des Mages", "petit médaillon en métal, remis aux candidats pour prouver leur réussite à l'examen de mage de première classe.", "0.2")
         }
         royaume.inventory = {
             "statue": Item("Statues en Or", "habitants transformés en or par magie.", "247")
@@ -195,10 +195,10 @@ class Game:
             title="Vers Auréole",
             description="Franchissez les étapes nécessaires pour atteindre ce lieu légendaire.",
             objectives=["Visiter le village de Heiter"
-                        , "talk avec Fern"
-                        , "talk à Heiter"
+                        , "parler avec fern"
+                        , "parler avec heiter"
                         , "Visiter Ausserst"
-                        , "take le médaillon de l'Examen des Mages"
+                        , "prendre le médaillon"
                         , "Aller à Auréole"],
             reward="Bénédiction d'Auréole"
         )
@@ -206,7 +206,8 @@ class Game:
         interaction_quest = Quest(
             title="Retrouver Himmel",
             description="Retrouvez votre ancien compagnon Himmel à Auréole.",
-            objectives=["Aller à Auréole"],
+            objectives=["Aller à Auréole"
+                        , "parler avec himmel"],
             reward="Souvenirs d'aventures récupérés"
         )
 
@@ -215,7 +216,7 @@ class Game:
             description="Récupérer le sceptre.",
             objectives=["Aller à la Capitale du Royaume Central"
                         , "prendre le sceptre"],
-            reward="Aucune récompense"
+            reward="Sceptre"
         )
 
         # Add quests to player's quest manager

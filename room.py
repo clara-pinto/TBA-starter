@@ -1,9 +1,10 @@
 # Define the Room class.
 
-class Room:
-   """The Room class represents a room in the game."""
+class Room():
+    """The Room class represents a room in the game."""
 
-    # Define the constructor. 
+    # Define the constructor.
+
     def __init__(self, name, description, image=None):
         """
         Initialize a Room with a name and description.
