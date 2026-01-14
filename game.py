@@ -18,6 +18,8 @@ import sys
 import tkinter as tk
 from tkinter import ttk, simpledialog
 
+import assets
+
 
 class Game:
 
@@ -65,25 +67,25 @@ class Game:
     def _setup_rooms(self):
         """Initialize all rooms and their exits."""
         #Create rooms
-        capitale = Room("la Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.")
+        capitale = Room("la Capitale du Royaume Central", "une grande cité humaine, centre politique et culturel du royaume.", "capitale.jpeg")
         self.rooms.append(capitale)
-        strahl = Room("Strahl", "une ville religieuse.")
+        strahl = Room("Strahl", "une ville religieuse.", "strahl.jpeg")
         self.rooms.append(strahl)
-        village = Room("le village de Heiter", "le village où habite Heiter, notre ami prêtre.")
+        village = Room("le village de Heiter", "le village où habite Heiter, notre ami prêtre.", "village_heiter.jpeg")
         self.rooms.append(village)
-        prairie = Room("la prairie", "grande étendue de fleurs.")
+        prairie = Room("la prairie", "grande étendue de fleurs.", "prairie.jpeg")
         self.rooms.append(prairie)
-        donjon = Room("un donjon", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
+        donjon = Room("un donjon", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.", "donjon.jpeg")
         self.rooms.append(donjon)
-        domaine = Room("le domaine de Graf Grenat", "une ville fortifiée dans les contrées du Nord, protégée par une barrière magique empechant les démons d'entrer dans la cité.\nCependant, bien que la ville reste prospère, ses environs sont une zone de guerre entre Aura et ses démons et les humains.")
+        domaine = Room("le domaine de Graf Grenat", "une ville fortifiée dans les contrées du Nord, protégée par une barrière magique empechant les démons d'entrer dans la cité.\nCependant, bien que la ville reste prospère, ses environs sont une zone de guerre entre Aura et ses démons et les humains.", "domaine.jpeg")
         self.rooms.append(domaine)
-        plateau = Room("un des villages isolés du Plateau du Nord", "plaines isolées où se trouvent des villages et de grandes forêts enneigées.")
+        plateau = Room("un des villages isolés du Plateau du Nord", "plaines isolées où se trouvent des villages et de grandes forêts enneigées.", "plateau.jpeg")
         self.rooms.append(plateau)
-        ausserst = Room("Ausserst", "la cité magique du Nord, siège de l'Association Magique Continentale.\nC'est aussi une ville réputée pour ses académies et infrastructures dédiées aux mages.")
+        ausserst = Room("Ausserst", "la cité magique du Nord, siège de l'Association Magique Continentale.\nC'est aussi une ville réputée pour ses académies et infrastructures dédiées aux mages.", "ausserst.jpeg")
         self.rooms.append(ausserst)
-        royaume = Room("le Royaume du Nord", "Prenez garde ! Les routes sont dangereuses et infestées de montres.")
+        royaume = Room("le Royaume du Nord", "Prenez garde ! Les routes sont dangereuses et infestées de montres.", "quete.jpeg")
         self.rooms.append(royaume)
-        aureole = Room("Auréole", "le royaume où reposerait les âmes des défunts.")
+        aureole = Room("Auréole", "le royaume où reposerait les âmes des défunts.", "aureole.jpeg")
         self.rooms.append(aureole)
 
         # Add rooms to game
