@@ -265,6 +265,7 @@ class Actions:
         objet = game.player.current_room.inventory.pop(item_name) 
         game.player.inventory[item_name] = objet
         game.player.quest_manager.check_action_objectives("prendre", item_name)
+        print("Vous avez pris l'item '{}'.".format(item_name))
         return True
 
     def drop(game, list_of_words, number_of_parameters):

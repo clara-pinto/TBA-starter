@@ -47,7 +47,7 @@ class Game:
         self.commands["history"] = Command("history", " : accéder à l'historique des lieux", Actions.history, 0)
         self.commands["back"] = Command("back", " : revenir en arrière", Actions.back, 0)
         self.commands["look"] = Command("look", " : afficher la liste des items et des personnages présents dans le lieu actuel", Actions.look, 0)
-        self.commands["take"] = Command("take", " : prendre les items dans le lieu actuel", Actions.take, 1)
+        self.commands["take"] = Command("take", " <name of item> : prendre les items dans le lieu actuel", Actions.take, 1)
         self.commands["check"] = Command("check", " : vérifier l'inventaire", Actions.check, 0)
         self.commands["talk"] = Command("talk", " <someone> : intéragir avec les personnages non joueurs", Actions.talk, 1)
         self.commands["quests"] = Command("quests", " : afficher la liste des quêtes", Actions.quests, 0)
@@ -163,6 +163,11 @@ class Game:
             self.process_command(input("> "))
             for character in self.player.current_room.characters.values():
                 character.move()
+            # Check win and lose conditions at each turn
+            if self.win():
+                self.finished = True
+            elif self.loose():
+                self.finished = True
         return None
 
     # Process the command entered by the player
@@ -228,8 +233,8 @@ class Game:
 
     def win(self):
         """Check if all quests are completed to finish the game."""
-        for elt in self.player.quests.values():
-            if elt.is_completed():
+        for elt in self.player.quest_manager.quests:
+            if elt.is_completed:
                 self.player.add_reward(elt.reward)
                 print(f"\nFélicitations ! Vous avez complété la quête : {elt.title}\n")
             else:
@@ -240,7 +245,8 @@ class Game:
     def loose(self):
         """Check if the player has lost the game."""
         # when you enter in donjon with no the sceptre
-        if sceptre not in self.player.inventory and self.player.current_room == donjon:
+        donjon = self.rooms[4]  # donjon is at index 4 in self.rooms
+        if "sceptre" not in self.player.inventory and self.player.current_room == donjon:
             print("\nVous avez perdu le jeu ! Il n'y a plus rien à faire ici.\n")
             return True
         return False
@@ -467,6 +473,11 @@ class GameGUI(tk.Tk):
         # Echo the command in output area
         print(f"> {command}\n")
         self.game.process_command(command)
+        # Check win and lose conditions at each turn
+        if self.game.win():
+            self.game.finished = True
+        elif self.game.loose():
+            self.game.finished = True
         # Update room image after command (in case player moved)
         self._update_room_image()
         if self.game.finished:
