@@ -364,6 +364,7 @@ class GameGUI(tk.Tk):
         self._btn_quit = tk.PhotoImage(file=str(assets_dir / 'quit-50.png'))
         self._btn_up = tk.PhotoImage(file=str(assets_dir / 'up-arrow-50.png'))
         self._btn_down = tk.PhotoImage(file=str(assets_dir / 'down-arrow-50.png'))
+        self._btn_back = tk.PhotoImage(file=str(assets_dir / 'back-arrow-50.png'))
 
         # Command buttons
         tk.Button(buttons_frame,
@@ -374,7 +375,7 @@ class GameGUI(tk.Tk):
         move_frame = ttk.LabelFrame(buttons_frame, text="Déplacements")
         move_frame.grid(row=1, column=0, sticky="ew", pady=4)
         tk.Button(move_frame,
-                  image=self._btn_up,
+                  image=self._btn_north,
                   command=lambda: self._send_command("go N"),
                   bd=0).grid(row=0, column=0, columnspan=2)
         tk.Button(move_frame,
@@ -386,9 +387,17 @@ class GameGUI(tk.Tk):
                   command=lambda: self._send_command("go E"),
                   bd=0).grid(row=1, column=1)
         tk.Button(move_frame,
-                  image=self._btn_down,
-                  command=lambda: self._send_command("go S"),
+                  image=self._btn_up,
+                  command=lambda: self._send_command("go U"),
                   bd=0).grid(row=2, column=0, columnspan=2)
+        tk.Button(move_frame,
+                  image=self._btn_down,
+                  command=lambda: self._send_command("go D"),
+                  bd=0).grid(row=0, column=0, columnspan=2)
+        tk.Button(move_frame,
+                  image=self._btn_back,
+                  command=lambda: self._send_command("back"),
+                  bd=0).grid(row=0, column=0, columnspan=2)
 
         # Quit button
         tk.Button(buttons_frame,
