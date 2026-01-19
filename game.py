@@ -48,6 +48,7 @@ class Game:
         self.commands["back"] = Command("back", " : revenir en arrière", Actions.back, 0)
         self.commands["look"] = Command("look", " : afficher la liste des items et des personnages présents dans le lieu actuel", Actions.look, 0)
         self.commands["take"] = Command("take", " <name of item> : prendre les items dans le lieu actuel", Actions.take, 1)
+        self.commands["drop"] = Command("drop", " <name of item> : remettre les items dans le lieu actuel", Actions.drop, 1)
         self.commands["check"] = Command("check", " : vérifier l'inventaire", Actions.check, 0)
         self.commands["talk"] = Command("talk", " <someone> : intéragir avec les personnages non joueurs", Actions.talk, 1)
         self.commands["quests"] = Command("quests", " : afficher la liste des quêtes", Actions.quests, 0)
@@ -122,7 +123,7 @@ class Game:
             "artefacts": Item("artéfacts liés à Auréole", "objets mystiques censés guider vers Aureole (pierres, talismans).", "2")
         }
         ausserst.inventory = {
-            "médaillon": Item("médaillon de l'Examen des Mages", "petit médaillon en métal, remis aux candidats pour prouver leur réussite à l'examen de mage de première classe.", "0.2")
+            "medaillon": Item("médaillon de l'Examen des Mages", "petit médaillon en métal, remis aux candidats pour prouver leur réussite à l'examen de mage de première classe.", "0.2")
         }
         royaume.inventory = {
             "statue": Item("Statues en Or", "habitants transformés en or par magie.", "247")
@@ -205,7 +206,7 @@ class Game:
                         , "parler avec fern"
                         , "parler avec heiter"
                         , "Visiter Ausserst"
-                        , "prendre le médaillon"
+                        , "prendre le medaillon"
                         , "Aller à Auréole"],
             reward="Bénédiction d'Auréole"
         )
