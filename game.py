@@ -357,11 +357,13 @@ class GameGUI(tk.Tk):
         assets_dir = Path(__file__).parent / 'assets'
         # Load pre-resized 50x50 PNG images for better quality
         self._btn_help = tk.PhotoImage(file=str(assets_dir / 'help-50.png'))
-        self._btn_up = tk.PhotoImage(file=str(assets_dir / 'up-arrow-50.png'))
-        self._btn_down = tk.PhotoImage(file=str(assets_dir / 'down-arrow-50.png'))
+        self._btn_north = tk.PhotoImage(file=str(assets_dir / 'north-arrow-50.png'))
+        self._btn_south = tk.PhotoImage(file=str(assets_dir / 'south-arrow-50.png'))
         self._btn_left = tk.PhotoImage(file=str(assets_dir / 'left-arrow-50.png'))
         self._btn_right = tk.PhotoImage(file=str(assets_dir / 'right-arrow-50.png'))
         self._btn_quit = tk.PhotoImage(file=str(assets_dir / 'quit-50.png'))
+        self._btn_up = tk.PhotoImage(file=str(assets_dir / 'up-arrow-50.png'))
+        self._btn_down = tk.PhotoImage(file=str(assets_dir / 'down-arrow-50.png'))
 
         # Command buttons
         tk.Button(buttons_frame,
