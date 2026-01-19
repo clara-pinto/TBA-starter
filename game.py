@@ -17,6 +17,7 @@ import sys
 # Tkinter imports for GUI
 import tkinter as tk
 from tkinter import ttk, simpledialog
+from PIL import Image, ImageTk
 
 import assets
 
@@ -453,8 +454,11 @@ class GameGUI(tk.Tk):
             image_path = assets_dir / 'scene.png'
 
         try:
-            # Load new image
-            self._image_ref = tk.PhotoImage(file=str(image_path))
+            # Load image using PIL and convert to PhotoImage
+            img = Image.open(str(image_path))
+            # Resize to fit canvas while maintaining aspect ratio
+            img.thumbnail((self.IMAGE_WIDTH, self.IMAGE_HEIGHT), Image.Resampling.LANCZOS)
+            self._image_ref = ImageTk.PhotoImage(img)
             # Clear canvas and redraw image
             self.canvas.delete("all")
             self.canvas.create_image(
@@ -462,7 +466,7 @@ class GameGUI(tk.Tk):
                 self.IMAGE_HEIGHT/2,
                 image=self._image_ref
             )
-        except (FileNotFoundError, tk.TclError):
+        except (FileNotFoundError, Exception) as e:
             # Fallback to text if image not found or cannot be loaded
             self.canvas.delete("all")
             self.canvas.create_text(
