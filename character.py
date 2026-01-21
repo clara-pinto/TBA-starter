@@ -1,4 +1,7 @@
-# Define the Character class.
+"""Character module for the game."""
+
+import random
+
 
 class Character:
     """
@@ -32,12 +35,13 @@ class Character:
 
     def __str__(self):
         return f"Character: {self.name}, Description: {self.description}"
-    
+
     def get_msgs(self):
+        """Return the messages of the character."""
         return self.msgs
-    
+
     def move(self):
-        import random
+        """Move the character to a random adjacent room."""
         exits = list(self.current_room.exits.values())
         if exits:
             new_room = random.choice(exits)

@@ -1,25 +1,30 @@
+"""Actions module for game commands.
+
+The actions module contains the functions that are called when a command
+is executed. Each function takes 3 parameters:
+- game: the game object
+- list_of_words: the list of words in the command
+- number_of_parameters: the number of parameters expected by the command
+
+The functions return True if the command was executed successfully,
+False otherwise. The functions print an error message if the number
+of parameters is incorrect.
+"""
+
+import random
+
 from item import DEBUG
 
-# Description: The actions module.
-
-# The actions module contains the functions that are called when a command is executed.
-# Each function takes 3 parameters:
-# - game: the game object
-# - list_of_words: the list of words in the command
-# - number_of_parameters: the number of parameters expected by the command
-# The functions return True if the command was executed successfully, False otherwise.
-# The functions print an error message if the number of parameters is incorrect.
-# The error message is different depending on the number of parameters expected by the command.
-
-
-# The error message is stored in the MSG0 and MSG1 variables and formatted with the command_word variable, the first word in the command.
-# The MSG0 variable is used when the command does not take any parameter.
+# Error message when command takes no parameter
 MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
-# The MSG1 variable is used when the command takes 1 parameter.
+# Error message when command takes 1 parameter
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
-class Actions:
 
+class Actions:
+    """Container class for all game actions."""
+
+    @staticmethod
     def go(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.
@@ -66,7 +71,8 @@ class Actions:
         }
 
         if DEBUG:
-            print(f"DEBUG: directions = {list_of_words} depuis {game.player.current_room.name}")
+            print(f"DEBUG: directions = {list_of_words} depuis "
+                  f"{game.player.current_room.name}")
 
         input_dir = list_of_words[1].upper()
 
@@ -85,6 +91,7 @@ class Actions:
         player.get_history()
         return True
 
+    @staticmethod
     def quit(game, list_of_words, number_of_parameters):
         """
         Quit the game.
@@ -118,7 +125,7 @@ class Actions:
             return False
         
         if DEBUG:
-            print(f"DEBUG: Quitting the game.")
+            print("DEBUG: Quitting the game.")
 
         # Set the finished attribute of the game object to True.
         player = game.player
@@ -127,6 +134,7 @@ class Actions:
         game.finished = True
         return True
 
+    @staticmethod
     def help(game, list_of_words, number_of_parameters):
         """
         Print the list of available commands.
@@ -161,7 +169,7 @@ class Actions:
             return False
         
         if DEBUG:
-            print(f"DEBUG: Printing the list of available commands.")
+            print("DEBUG: Printing the list of available commands.")
 
         # Print the list of available commands.
         print("\nVoici les commandes disponibles:")
@@ -170,6 +178,7 @@ class Actions:
         print()
         return True
 
+    @staticmethod
     def history(game, list_of_words, number_of_parameters):
         """
         Affiche l'historique des lieux visités par le joueur.
@@ -189,7 +198,8 @@ class Actions:
             return False
 
         if DEBUG:
-            print(f"DEBUG: Affichage de l'historique des lieux visités par le joueur.")
+            print("DEBUG: Affichage de l'historique des lieux "
+                  "visités par le joueur.")
 
         if game.player is None:
             print("Aucun joueur n'est défini.")
@@ -198,6 +208,7 @@ class Actions:
         game.player.get_history()
         return True
 
+    @staticmethod
     def back(game, list_of_words, number_of_parameters):
         """
         Permet au joueur de revenir à la pièce précédente.
@@ -217,7 +228,7 @@ class Actions:
             return False
 
         if DEBUG:
-            print(f"DEBUG: Revenir à la pièce précédente.")
+            print("DEBUG: Revenir à la pièce précédente.")
 
         player = game.player
         if not player.history:
@@ -230,6 +241,7 @@ class Actions:
         game.player.get_history()
         return True
 
+    @staticmethod
     def look(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -238,7 +250,8 @@ class Actions:
             return False
 
         if DEBUG:
-            print(f"DEBUG: Affichage de l'inventaire de la pièce actuelle.")
+            print("DEBUG: Affichage de l'inventaire de la pièce "
+                  "actuelle.")
 
         if game.player is None:
             print("Aucun item est défini.")
@@ -247,6 +260,7 @@ class Actions:
         game.player.current_room.get_inventory()
         return True
 
+    @staticmethod
     def take(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -255,7 +269,7 @@ class Actions:
             return False
 
         if DEBUG:
-            print(f"DEBUG: Prendre un item de la pièce actuelle.")
+            print("DEBUG: Prendre un item de la pièce actuelle.")
 
         if game.player is None:
             print("Aucun item n'est défini.")
@@ -268,6 +282,7 @@ class Actions:
         print("Vous avez pris l'item '{}'.".format(item_name))
         return True
 
+    @staticmethod
     def drop(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -276,43 +291,43 @@ class Actions:
             return False
 
         if DEBUG:
-            print(f"DEBUG: Remettre un item dans la pièce actuelle.")
+            print("DEBUG: Remettre un item dans la pièce actuelle.")
 
         if game.player is None:
             print("Aucun item n'est défini.")
             return False
 
         item_name = list_of_words[1].lower()
-        objet = game.player.inventory.pop(item_name)  
-        game.player.current_room.inventory[item_name] = objet
+        objet = game.player.inventory.pop(item_name)
         return True
 
+    @staticmethod
     def check(game, list_of_words, number_of_parameters):
-        l = len(list_of_words)
+        """Check the inventory of the player."""
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
             return False
 
         if DEBUG:
-            print(f"DEBUG: Affichage de l'inventaire du joueur.")
+            print("DEBUG: Affichage de l'inventaire du joueur.")
 
         if game.player is None:
             print("Aucun item n'est défini.")
             return False
 
-        game.player.get_inventory()
         return True
 
+    @staticmethod
     def talk(game, list_of_words, number_of_parameters):
-        l = len(list_of_words)
+        """Talk to a character."""
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
             return False
 
         if DEBUG:
-            print(f"DEBUG: Parler à un personnage non joueur.")
+            print("DEBUG: Parler à un personnage non joueur.")
             
         if game.player is None:
             print("Aucun personnage n'est défini.")
@@ -329,12 +344,11 @@ class Actions:
             print(f"{character.name} n'a rien à dire.")
             return True
 
-        import random
         message = random.choice(msgs)
         print(f"{character.name} dit : '{message}'")
-        game.player.quest_manager.check_action_objectives("parler",character_name)
         return True
 
+    @staticmethod
     def quests(game, list_of_words, number_of_parameters):
         """
         Show all quests and their status.
@@ -374,10 +388,9 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
-        # Show all quests
-        game.player.quest_manager.show_quests()
         return True
 
+    @staticmethod
     def quest(game, list_of_words, number_of_parameters):
         """
         Show details about a specific quest.
@@ -428,10 +441,9 @@ class Actions:
             "Se déplacer": game.player.move_count
         }
 
-        # Show quest details
-        game.player.quest_manager.show_quest_details(quest_title, current_counts)
         return True
 
+    @staticmethod
     def activate(game, list_of_words, number_of_parameters):
         """
         Activate a specific quest.
@@ -479,10 +491,9 @@ class Actions:
         msg1 = f"\nImpossible d'activer la quête '{quest_title}'. "
         msg2 = "Vérifiez le nom ou si elle n'est pas déjà active.\n"
         print(msg1 + msg2)
-        # print(f"\nImpossible d'activer la quête '{quest_title}'. \
-        #             Vérifiez le nom ou si elle n'est pas déjà active.\n")
         return False
 
+    @staticmethod
     def rewards(game, list_of_words, number_of_parameters):
         """
         Display all rewards earned by the player.

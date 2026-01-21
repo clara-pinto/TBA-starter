@@ -1,15 +1,16 @@
+"""Item module for the game."""
 
 DEBUG = True
 
-# Define the Item class.
+
 class Item():
-    # Define the constructor.
+    """Represents an item in the game."""
+
     def __init__(self, name, description, weight):
         self.name = name
         self.description = description
         self.weight = weight
 
-     # The string representation of the item.
     def __str__(self):
-        return  self.name \
-                + self.description
+        """Return the string representation of the item."""
+        return self.name + self.description

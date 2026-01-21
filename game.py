@@ -1,28 +1,22 @@
-# Description: Game class
+"""Game module for the text-based adventure game."""
 
-# Import modules
+from pathlib import Path
+import sys
+import tkinter as tk
+from tkinter import ttk, simpledialog
+from PIL import Image, ImageTk
 
 from room import Room
 from player import Player
 from command import Command
 from actions import Actions
-from item import Item
+from item import Item, DEBUG
 from character import Character
 from quest import Quest
-from item import DEBUG
-
-from pathlib import Path
-import sys
-
-# Tkinter imports for GUI
-import tkinter as tk
-from tkinter import ttk, simpledialog
-from PIL import Image, ImageTk
-
-import assets
 
 
 class Game:
+    """Main game class for the text-based adventure."""
 
     # Constructor
     def __init__(self):
@@ -155,8 +149,8 @@ class Game:
         self.player = Player(player_name)
         self.player.current_room = self.rooms[0] #capitale
 
-    # Play the game
     def play(self):
+        """Play the game main loop."""
         self.setup()
         self.print_welcome()
         # Loop until the game is finished
@@ -172,31 +166,28 @@ class Game:
                 self.finished = True
         return None
 
-    # Process the command entered by the player
     def process_command(self, command_string) -> None:
-
+        """Process the command entered by the player."""
         # Split the command string into a list of words
         list_of_words = command_string.split(" ")
 
         command_word = list_of_words[0]
 
         # If the command is not recognized, print an error message
-        if command_word not in self.commands.keys():
+        if command_word not in self.commands:
             print('>')
         # If the command is recognized, execute it
         else:
             command = self.commands[command_word]
-            command.action(self, list_of_words, command.number_of_parameters)
-    
+            command.action(
+                self, list_of_words, command.number_of_parameters)
 
-    # Print the welcome message
     def print_welcome(self):
-        print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
+        """Print the welcome message."""
+        print(f"\nBienvenue {self.player.name} "
+              "dans ce jeu d'aventure !")
         print("Entrez 'help' si vous avez besoin d'aide.")
-        #
         print(self.player.current_room.get_long_description())
-    
-    
     # Setup quests
     def _setup_quests(self):
         """Initialize all quests."""
@@ -238,18 +229,23 @@ class Game:
         for elt in self.player.quest_manager.quests:
             if elt.is_completed:
                 self.player.add_reward(elt.reward)
-                print(f"\nFélicitations ! Vous avez complété la quête : {elt.title}\n")
+                print(f"\nFélicitations ! Vous avez complété la "
+                      f"quête : {elt.title}\n")
             else:
                 return False
-        print("\nVous avez terminé toutes les quêtes du jeu ! Merci d'avoir joué.\n")
+        print("\nVous avez terminé toutes les quêtes du jeu ! "
+              "Merci d'avoir joué.\n")
         return True
-    
+
     def loose(self):
         """Check if the player has lost the game."""
         # when you enter in donjon with no the sceptre
-        donjon = self.rooms[4]  # donjon is at index 4 in self.rooms
-        if "sceptre" not in self.player.inventory and self.player.current_room == donjon:
-            print("\nVous avez perdu le jeu ! Il n'y a plus rien à faire ici.\n")
+        # donjon is at index 4 in self.rooms
+        donjon = self.rooms[4]
+        if ("sceptre" not in self.player.inventory and
+                self.player.current_room == donjon):
+            print("\nVous avez perdu le jeu ! "
+                  "Il n'y a plus rien à faire ici.\n")
             return True
         return False
 
