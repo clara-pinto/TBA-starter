@@ -24,7 +24,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
-    
+
     # Setup the game
     def setup(self, player_name=None):
         """Initialize the game with rooms, commands, and quests."""
@@ -50,14 +50,14 @@ class Game:
         self.commands["quest"] = Command("quest", " <titre> : afficher les détails d'une quête", Actions.quest, 1)
         self.commands["activate"] = Command("activate", " <titre> : activer une quête", Actions.activate, 1)
         self.commands["rewards"] = Command("rewards", " : afficher vos récompenses", Actions.rewards, 0)
-        
-        
+
+
         self.directions = []
         for i in self.rooms:
             for direction in i.get_exits().keys():
                 if direction not in self.directions:
                     self.directions.append(direction)
-    
+
 
         # Setup rooms
     def _setup_rooms(self):
@@ -135,10 +135,10 @@ class Game:
         }
         aureole.characters = {
             "himmel": Character("Himmel", "le héros humain qui a vaincu le Roi Démon, avec nous.", aureole, ["Ce qui compte, ce n'est pas la durée... mais les souvenirs qu'on a créés ensemble.","Même si le monde est cruel, il y a toujours de la beauté à trouver."])
-        }   
+        }
         strahl.characters = {
             "flamme": Character("Flamme", "grande magicienne qui nous a sauvé par le passé et qui nous a enseigné la magie.", strahl, ["La magie est une trace de notre passage dans le monde.","Chaque sort raconte une histoire."])
-        }             
+        }
 
         # Setup player and starting room
     def _setup_player(self, player_name=None):

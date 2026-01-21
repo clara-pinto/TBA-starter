@@ -36,10 +36,7 @@ class Command:
         self.help_string = help_string
         self.action = action
         self.number_of_parameters = number_of_parameters
-    
+
     def __str__(self):
         """Return the string representation of the command."""
         return self.command_word + self.help_string
-    
-
-

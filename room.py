@@ -9,7 +9,6 @@ class Room():
     def __init__(self, name, description, image=None):
         """
         Initialize a Room with a name and description.
-        
         >>> room = Room("Hall", "dans un grand hall")
         >>> room.name
         'Hall'
@@ -22,11 +21,12 @@ class Room():
         """
         self.name = name
         self.description = description
-        self.image = image # Path to image file (PNG/JPG) for this room
+        # Path to image file (PNG/JPG) for this room
+        self.image = image
         self.exits = {}
         self.inventory = {}
         self.characters = {}
-    
+
     def get_exit(self, direction):
         """Return the room in the given direction if it exists."""
         if direction in self.exits:
@@ -36,7 +36,7 @@ class Room():
     def get_exits(self):
         """Return the exits dictionary."""
         return self.exits
-    
+
     def get_exit_string(self):
         """Return a string describing the room's exits."""
         exit_string = "Sorties: "
