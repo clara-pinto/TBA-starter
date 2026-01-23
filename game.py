@@ -10,9 +10,10 @@ from room import Room
 from player import Player
 from command import Command
 from actions import Actions
-from item import Item, DEBUG
+from item import Item
 from character import Character
 from quest import Quest
+from item import DEBUG
 
 
 class Game:

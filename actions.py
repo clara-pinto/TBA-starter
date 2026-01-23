@@ -304,6 +304,7 @@ class Actions:
     @staticmethod
     def check(game, list_of_words, number_of_parameters):
         """Check the inventory of the player."""
+        l = len(list_of_words)
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
@@ -316,11 +317,13 @@ class Actions:
             print("Aucun item n'est défini.")
             return False
 
+        game.player.get_inventory()
         return True
 
     @staticmethod
     def talk(game, list_of_words, number_of_parameters):
         """Talk to a character."""
+        l = len(list_of_words)
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
@@ -346,6 +349,7 @@ class Actions:
 
         message = random.choice(msgs)
         print(f"{character.name} dit : '{message}'")
+        game.player.quest_manager.check_action_objectives("parler",character_name)
         return True
 
     @staticmethod
@@ -388,6 +392,8 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
+        # Show all quests
+        game.player.quest_manager.show_quests()
         return True
 
     @staticmethod
@@ -441,6 +447,8 @@ class Actions:
             "Se déplacer": game.player.move_count
         }
 
+        # Show quest details
+        game.player.quest_manager.show_quest_details(quest_title, current_counts)
         return True
 
     @staticmethod
