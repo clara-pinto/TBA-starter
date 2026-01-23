@@ -11,6 +11,14 @@ Ainsi, vous entrez dans l'univers du manga "Frieren". Vous pouvez vous déplacer
 Le scénario gagnant du jeu est simplement d'accomplir toutes les quêtes proposées : _Récupérer le Sceptre_, _Vers Auréole_ et _Retrouver Himmel_.
 En revanche votre partie sera perdu si vous allez dans le donjon sans être protégé...
 
+### Description des quêtes
+
+- _Récupérer le Sceptre_ : vous devez récupérer le sceptre qui vous permettra de rester protéger des dangers lors de votre aventure ;
+- _Vers Auréole_ : vous devez visiter plusieurs lieux et rencontrer certains personnages pour pouvoir accéder à votre destionation : Auréole ;
+- _Retrouver Himmel_ : une fois arrivé à Auréole, vous pourrez enfin retrouver votre compagnon perdu ;
+
+### Description des commandes
+
 La commande `help` affichera toutes les commandes disponible, qui sont :
 - `quit` : quitter le jeu ;
 - `go` : se déplacer dans une direction cardinale ;
@@ -27,15 +35,14 @@ La commande `help` affichera toutes les commandes disponible, qui sont :
 - `rewards` : afficher vos récompenses ;
 
 
-## Structuration
+## Guide développeur
 
-Il y a 8 modules contenant chacun une classe.
+![Diagramme de classes](assets/schema.png)
 
-- `game.py` / `Game` : description de l'environnement, interface avec le joueur ;
-- `room.py` / `Room` : propriétés génériques d'un lieu  ;
-- `player.py` / `Player` : le joueur ;
-- `command.py` / `Command` : les consignes données par le joueur ;
-- `actions.py` / `Action` : les fonctions qui sont appelées lorsque une commande est exécutée ;
-- `item.py`  / `Item` : représenter les différents objets que le joueur pourra trouver dans les différents lieux de la map ;
-- `character.py` / `Character` : représenter les différents personnages non joueurs ;
-- `quest.py` / `Quest` et `QuestManager`: création des quêtes et gestion des quêtes ;
+
+## Perspectives de développement
+
+Pour améliorer cette version du jeu, quelques éléments pourraient être ajouter :
+- des _démons_ contre qui le joueur devrait se battre : il faudrait ajouter des commandes qui permettent de faire des combats ;
+- la possibilité de prendre des PNJ en compagnon de voyage ;
+- rajouter dans l'interface graphique la possibilité de voir les PNJ auxquels on parle, les items qu'on a dans notre inventaire, etc...;
