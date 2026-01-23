@@ -41,6 +41,31 @@ class Player():
         self.quest_manager = QuestManager(self)
         self.rewards = []   # List to store earned rewards
 
+    # Define the move method.
+    def move(self, direction):
+        # Get the next room from the exits dictionary of the current room.
+        next_room = self.current_room.exits[direction]
+        self.history.append(self.current_room)
+
+        # If the next room is None, print an error message and return False.
+        if next_room is None:
+            # Afficher un message d'erreur et la liste des sorties de la pièce courante
+            print(f"\nVous ne pouvez pas aller dans cette direction.\n{self.current_room.get_exit_string()}\n")
+            return False
+        
+        # Set the current room to the next room.
+        self.current_room = next_room
+        print(self.current_room.get_long_description())
+
+        # Check room visit objectives
+        self.quest_manager.check_room_objectives(self.current_room.name)
+
+        # Increment move counter and check movement objectives
+        self.move_count += 1
+        self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+
+        return True
+
     def get_history(self):
         """Get the history of visited rooms."""
         if len(self.history) == 0:
