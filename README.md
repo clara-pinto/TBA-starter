@@ -13,7 +13,7 @@ En revanche votre partie sera perdu si vous allez dans le donjon sans être prot
 
 ### Description des quêtes
 
-- _Récupérer le Sceptre_ : vous devez récupérer le sceptre qui vous permettra de rester protéger des dangers lors de votre aventure ;
+- _Récupérer le Sceptre_ : vous devez récupérer le sceptre qui vous permettra de rester protégé des dangers lors de votre aventure ;
 - _Vers Auréole_ : vous devez visiter plusieurs lieux et rencontrer certains personnages pour pouvoir accéder à votre destionation : Auréole ;
 - _Retrouver Himmel_ : une fois arrivé à Auréole, vous pourrez enfin retrouver votre compagnon perdu ;
 
